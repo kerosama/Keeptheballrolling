@@ -19,6 +19,7 @@
     <sprites name="Platforms">
       <sprite>sprites\sprite8</sprite>
       <sprite>sprites\sprite9</sprite>
+      <sprite>sprites\sprite10</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -27,9 +28,12 @@
     <object>objects\Buster_</object>
     <object>objects\Platform1</object>
     <object>objects\object2</object>
+    <object>objects\brick</object>
+    <object>objects\object4</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Level1</room>
+    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

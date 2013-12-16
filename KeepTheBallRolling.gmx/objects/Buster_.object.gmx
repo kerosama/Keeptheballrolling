@@ -25,13 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>jumpspeed = -10;
+            <string>image_angle = 0;
+
+jumpspeed = -10;
 maxvspeed = 10;
 canjump = 2; //0 if cannot jump or continue jumping
 //1 if cannot jump but can continue jumping (i.e. in air)
 //2 if can jump
 mass = 10;
-hspeed = 3;
+hspeed = 7;
 radius = 32;
 </string>
           </argument>
@@ -81,10 +83,47 @@ radius = 32;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(vspeed &gt; maxvspeed)
+            <string>/*while(position_meeting(x, y + radius,Platform1))
+        y -= .1;
+    while(position_meeting(x + radius, y,Platform1))
+        x -= .1;
+    while(position_meeting(x + lengthdir_x(radius, 225), y + lengthdir_y(radius, 225),Platform1))
+        {
+         y -= .2
+         x += .2
+        }
+    while(position_meeting(x + lengthdir_x(radius, 315), y + lengthdir_y(radius,315),Platform1))
+       {
+         y -= .2
+         x -= .2
+        }
+        
+    while(position_meeting(x + lengthdir_x(radius, 45), y + lengthdir_y(radius,45),Platform1))
+       {
+         y += .2
+         x -= .2
+        }
+    while(position_meeting(x + lengthdir_x(radius, 135), y + lengthdir_y(radius,135),Platform1))
+       {
+         y += .2
+         x += .2
+        }
+        y = round(y);
+        x = round(x);
+*/
+if(vspeed &gt; maxvspeed)
 {
     vspeed = maxvspeed;
 }
+if(image_angle &gt; 360.000)
+{
+    image_angle -= 360.000;
+}
+if(image_angle &lt; 0.000)
+{
+    image_angle += 360.000;
+}
+angle = image_angle*pi/180;
 </string>
           </argument>
         </arguments>
@@ -107,20 +146,32 @@ radius = 32;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//falling
+            <string>
+//falling
 if(place_free(x, y + vspeed + 1))
 {
-    gravity = .5;
+    gravity = 1;
+    if(canjump == 2)
+    {
+        canjump = 0;
+    }
 }
 else
 {        
+    
     gravity = 0;
     if(vspeed &gt; 0)
     {
-    move_contact_solid(270, maxvspeed);
+        move_contact_solid(270, 10);
         vspeed = 0;
         canjump = 2;
-        y += 1;        
+        if(!position_empty(x, y + radius + 1))
+        {
+        mass = 0;
+            y += 1;
+        }     
+        if(place_free(x, y))
+            y -= 1;
     }     
 }
 
@@ -141,14 +192,16 @@ if(keyboard_check_released(vk_up) &amp;&amp; canjump = 1)
     canjump = 0;
 }
 
-
-
 //horizontal collisions
-if(!place_free(x + hspeed, y - radius/16))
+if(!place_free(x + hspeed, y - 2))
 {
-    hspeed = -hspeed;
-    
+    hspeed = -hspeed;    
 }
+//top collision
+//if(!place_free(x, y + vspeed - 1))
+//{
+    //vspeed = 0;
+//}
 
 //rolling
 image_angle -= (180/pi*hspeed/radius);
