@@ -205,6 +205,8 @@ if(!place_free(x + hspeed, y - 2))
 
 //rolling
 image_angle -= (180/pi*hspeed/radius);
+
+//Trenton = AWSOMESAUSE
 </string>
           </argument>
         </arguments>
