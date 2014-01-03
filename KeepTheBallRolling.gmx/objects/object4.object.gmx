@@ -48,38 +48,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = mouse_x;
-y = mouse_y;
-image_angle += pi/6;
-while(position_meeting(x, y + radius,Platform1))
-        y -= .1;
-    while(position_meeting(x + radius, y,Platform1))
-        x -= .1;
-while(position_meeting(x, y - radius,Platform1))
-        y += .1;
-    while(position_meeting(x - radius, y,Platform1))
-        x += .1;
-    while(position_meeting(x + lengthdir_x(radius, 225), y + lengthdir_y(radius, 225),Platform1))
-        {
-         y -= .2
-         x += .2
-        }
-    while(position_meeting(x + lengthdir_x(radius, 315), y + lengthdir_y(radius,315),Platform1))
-       {
-         y -= .2
-         x -= .2
-        }
-        
-    while(position_meeting(x + lengthdir_x(radius, 45), y + lengthdir_y(radius,45),Platform1))
-       {
-         y += .2
-         x -= .2
-        }
-    while(position_meeting(x + lengthdir_x(radius, 135), y + lengthdir_y(radius,135),Platform1))
-       {
-         y += .2
-         x += .2
-        }
+            <string>image_angle += pi;
+
 </string>
           </argument>
         </arguments>
@@ -98,7 +68,11 @@ while(position_meeting(x, y - radius,Platform1))
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
+<<<<<<< HEAD
     <point>32,32</point>
+=======
+    <point>0,0</point>
+>>>>>>> 98612a034927b6f584f4db4ee13ebc4a085e4eda
     <point>32,32</point>
   </PhysicsShapePoints>
 </object>
