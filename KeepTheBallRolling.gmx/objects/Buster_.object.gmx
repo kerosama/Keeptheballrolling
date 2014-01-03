@@ -35,6 +35,8 @@ canjump = 2; //0 if cannot jump or continue jumping
 mass = 10;
 hspeed = 7;
 radius = 32;
+
+button = false;
 </string>
           </argument>
         </arguments>
@@ -191,7 +193,43 @@ if(keyboard_check_released(vk_up) &amp;&amp; canjump = 1)
 {
     canjump = 0;
 }
-
+//button
+if(position_meeting(x, y + 32, button1) &amp;&amp; button = false)
+{
+    button1.y += 32;
+    button = true;
+}
+//trampoline
+if(position_meeting(x, y + 32, jumper1) &amp;&amp; button = true)
+{
+    vspeed -= 40;
+}
+//trapdoor
+if(position_meeting(x, y + 32, trapdoor1) || position_meeting(x, y + 32, trapdoor2))
+{
+    trapdoor1.image_angle -= 90;
+    trapdoor2.image_angle += 90
+}
+//friction plate
+if(position_meeting(x, y + 32, brake1))
+{
+    if(hspeed &gt; 0 &amp;&amp; hspeed - 0.25 &lt;= 0)
+    {
+        hspeed = 0;
+    }
+    if(hspeed &gt; 0 &amp;&amp; hspeed - 0.25 &gt; 0)
+    {
+        hspeed -= .25;
+    }
+    if(hspeed &lt; 0 &amp;&amp; hspeed + 0.25 &gt;= 0)
+    {
+        hspeed = 0;
+    }
+    if(hspeed &lt; 0 &amp;&amp; hspeed + 0.25 &lt; 0)
+    {
+        hspeed += .25;
+    }
+}
 //horizontal collisions
 if(!place_free(x + hspeed, y - 2))
 {

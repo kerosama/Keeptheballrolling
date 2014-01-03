@@ -20,6 +20,13 @@
       <sprite>sprites\sprite8</sprite>
       <sprite>sprites\sprite9</sprite>
       <sprite>sprites\sprite10</sprite>
+      <sprite>sprites\sprite11</sprite>
+      <sprite>sprites\sprite12</sprite>
+      <sprite>sprites\sprite14</sprite>
+      <sprite>sprites\sprite15</sprite>
+    </sprites>
+    <sprites name="tools">
+      <sprite>sprites\sprite13</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -30,6 +37,11 @@
     <object>objects\object2</object>
     <object>objects\brick</object>
     <object>objects\object4</object>
+    <object>objects\jumper1</object>
+    <object>objects\brake1</object>
+    <object>objects\button1</object>
+    <object>objects\trapdoor1</object>
+    <object>objects\trapdoor2</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Level1</room>
