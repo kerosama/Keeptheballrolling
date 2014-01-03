@@ -2,7 +2,7 @@
 <room>
   <caption></caption>
   <width>640</width>
-  <height>1000</height>
+  <height>480</height>
   <vsnap>1</vsnap>
   <hsnap>1</hsnap>
   <isometric>0</isometric>
@@ -50,7 +50,11 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="640" hview="480" xport="0" yport="0" wport="640" hport="480" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="object7" x="476" y="79" name="inst_9791F91B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="brick" x="0" y="0" name="inst_146ED7A3" locked="0" code="" scaleX="4" scaleY="15" colour="4294967295" rotation="0"/>
+    <instance objName="brick" x="128" y="352" name="inst_014FA2F2" locked="0" code="" scaleX="16" scaleY="4" colour="4294967295" rotation="0"/>
+    <instance objName="object7" x="339" y="41" name="inst_FB4CABB7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="object10" x="416" y="69" name="inst_4AE31298" locked="0" code="" scaleX="1.0756299495697" scaleY="1.08475005626678" colour="4294967295" rotation="0"/>
+    <instance objName="object10" x="145" y="48" name="inst_35F8077E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

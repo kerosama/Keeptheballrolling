@@ -25,16 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = 0;
-
-jumpspeed = -20;
-canjump = 2; //0 if cannot jump or continue jumping
-//1 if cannot jump but can continue jumping (i.e. in air)
-//2 if can jump
-mass = 10;
-hspeed = 0;
-radius = 32;
-angle = 0;
+            <string>//gravity = 1;
+bc = instance_create(x, y, boundingCircle);
+reCircle(bc, 33, x, y);
+//vspeed = 9;
+//hspeed = 3;
+canjump = 0;
+jumpspeed = -4;
+//c = 0;
+rad1 = 0;
+rad2 = 0;
+collisions = 0;
+vspeed = .1;
 </string>
           </argument>
         </arguments>
@@ -66,6 +68,30 @@ angle = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+reCircle(bc, 33, x, y);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -83,49 +109,10 @@ angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//falling
-if(position_empty(x + lengthdir_x(32, 45) + 1, y + lengthdir_y(32, -45) + 2 + vspeed))
-    a = 1;
-    else
-        a = 0;
-if(position_empty(x - lengthdir_x(32, 45) - 1, y + lengthdir_y(32, -45) + 2 + vspeed))
-    b = 1;
-    else
-        b = 0;
-        
-corners = position_empty(x - lengthdir_x(32, 45) - 1, y + lengthdir_y(32, -45) + 2 + vspeed) 
-xor position_empty(x + lengthdir_x(32, 45) + 2, y + lengthdir_y(32, -45) + 2 + vspeed);
-
-if(place_free(x, y + vspeed + 2) &amp;&amp; corners == 0)
-{
-    gravity = 1;
-    gravity_direction = 270;
-    if(canjump == 2)
-    {
-        canjump = 0;
-    }
-}
-else if(corners == 1)
-{
-    //gravity = sin(pi/4);
-    //gravity_direction = 315;        
-    //hspeed = speed*cos(pi/4);
-    //vspeed = hspeed;
-    canjump = 2;    
-}
-else
-{       
-    gravity = 0;
-    gravity_direction = 270;
-    if(vspeed &gt; 0)
-    {
-        canjump = 2;
-    } 
-    vspeed = 0;        
-}
-
-
-
+            <string>if(canjump != 2)
+vspeed += 1;
+//else
+//vspeed += abs(sin(direction*pi/180));
 //jumping
 if(keyboard_check(vk_up) &amp;&amp; (canjump == 1))
 {
@@ -142,72 +129,59 @@ if(keyboard_check_released(vk_up) &amp;&amp; canjump == 1)
     canjump = 0;
 }
 
-/*if(!place_free(x, y + vspeed) &amp;&amp; vspeed != 0)
+/*if(keyboard_check(vk_left))
 {
-    canjump = 0;
-    while(place_free(x, y - 1))
-    y--;
-    vspeed = 0;  
-}*/
+    hspeed = -5;
+}
+else if(keyboard_check(vk_right))
+{
+    hspeed = 5;
+}
+else
+    hspeed = 0;
 
-//horizontal collisions
-if(!place_free(x + hspeed, y) &amp;&amp; instance_place(x + hspeed, y, platform).topsolid != 1)
+if(keyboard_check(vk_down))
 {
-    move_bounce_solid(false);   
+    vspeed = 5;
+}
+else if(keyboard_check(vk_up))
+{
+    vspeed = -5;
+    
+}
+else
+    vspeed = 0;*/
+
+collisions = 0;
+h = 0;
+v = 0;
+for(k = 0; k &lt; instance_number(platform); k++)
+{
+    inst = instance_find(platform, k);
+    
+    if(circleXbox(bc, inst, hspeed, vspeed, false) == 4)
+    {        
+        collisions++;       
+        circleXbox(bc, inst, 0, 0, true);    
+        hspeed = h;
+vspeed = v; 
+    }  
+     
+            
 }
 
-//while(place_free(x, y + 2) &amp;&amp; canjump == 2)
-    //y++; 
-while(!place_free(x, y + 1) &amp;&amp; canjump == 2)
-    y--; 
+if(collisions &gt; 0)
+{
+
+}
+if(canjump == 2 &amp;&amp; collisions == 0)
+{
+    canjump = 0;
+}
+
 
     
-//rolling
-angle -= (180/pi*hspeed/radius);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>524</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_color</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>13</kind>
-            <string>65280</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_sprite_ext(Buster, 0, x, y, 1, 1, angle, image_blend, image_alpha);
-//draw_circle(x - lengthdir_x(32, 45) - 1, y + lengthdir_y(32, -45) + 1, 2, false);
+
 </string>
           </argument>
         </arguments>
@@ -226,7 +200,7 @@ angle -= (180/pi*hspeed/radius);
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>0,0</point>
+    <point>32,32</point>
     <point>32,32</point>
   </PhysicsShapePoints>
 </object>
